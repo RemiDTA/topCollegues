@@ -1,0 +1,13 @@
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src={{collegue.url}} alt={{collegue.nom}} style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{collegue.nom}}</h5>
+      <p class="card-text">{{collegue.score}}</p>
+      <p class="card-text">
+        <small class="text-muted">
+          <button (click)="jaime(collegue)" type="button" class="btn btn-outline-success mr-4">J'aime</button>
+          <button (click)="jedeteste(collegue)" type="button" class="btn btn-outline-danger">Je deteste</button>
+        </small>
+      </p>
+    </div>
+  </div>
