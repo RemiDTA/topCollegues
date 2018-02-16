@@ -9,14 +9,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { TableauComponent } from './tableau/tableau.component';
 import { ClassiqueComponent } from './classique/classique.component';
 import { CarousselComponent } from './caroussel/caroussel.component';
+import { PageDetailComponent } from './page-detail/page-detail.component';
 
 const appRoutes: Routes = [
   { path: 'classique', component: ClassiqueComponent }, // /classique affiche le composant A
   { path: 'tableau', component: TableauComponent },
   { path: 'caroussel', component: CarousselComponent },
-  { path: '**', redirectTo: 'classique'} // redirige vers la route classique par défaut
+  { path: 'detail/:nom', component: PageDetailComponent },
+  { path: '**', redirectTo: 'classique'}, // redirige vers la route classique par défaut
+  
   ];
-
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ const appRoutes: Routes = [
     TableauComponent,
     ClassiqueComponent,
     CarousselComponent,
+    PageDetailComponent
   ],
   imports: [
     BrowserModule,
