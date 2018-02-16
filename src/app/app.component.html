@@ -2,6 +2,7 @@
   <h1> Top Collègues </h1>
 
   <h2>Les meilleurs collègues du moment !</h2>
+  <div class="bg-light pt-5 pl-5 pb-5 pr-5 mb-5">
   <form id="formulaire">
     <div class="form-group">
       <label for="exampleInputEmail1">Pseudo</label>
@@ -11,16 +12,21 @@
       <label for="exampleInputPassword1">URL</label>
       <input type="text" class="form-control" id="inputUrl" placeholder="URL de l'image" #imageUrl>
     </div>
-    <button (click)="add(pseudo, imageUrl)" class="btn btn-primary">Ajouter</button>
+    <button (click)="add(pseudo, imageUrl, $event)" class="btn btn-primary">Ajouter</button>
   </form>
+  </div>
 
   <div *ngIf="insertion">
     <div class="p-3 mb-2 bg-success text-white">Le collègue {{nouveau}} à été ajouté.</div>
   </div>
-  <div>
-
+  <div class="mb-2">
+    <a class="btn btn-primary mr-4" routerLink="/classique" routerLinkActive="active-link" role="button">Classique</a>
+    <a class="btn btn-primary mr-4" routerLink="/tableau" routerLinkActive="active-link" role="button">Tableau</a>
+    <a class="btn btn-primary mr-4" routerLink="/caroussel" routerLinkActive="active-link" role="button">Caroussel</a>
+  </div>
 <div class="row">
     <div class="card-deck" *ngFor="let obj of this.collegues">
       <app-un-collegue [collegue]="obj"></app-un-collegue>
+      
     </div>
 </div>
