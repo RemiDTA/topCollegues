@@ -14,18 +14,18 @@ export class UnCollegueComponent implements OnInit {
   @Output() majScore: EventEmitter<void> = new EventEmitter<void>()
   // paramètre d'entrée "collegue"
   @Input() collegue: Collegue;
-  constructor(private _cs: CollegueService) { }
+  constructor(public cs: CollegueService) { }
   ngOnInit() {
   }
   jaime(collegue: Collegue) {
     // événement clic sur le bouton "J'aime"
     // => le score du collègue est augmenté de 10
-    this._cs.aimerUnCollegue(collegue);
+    this.cs.aimerUnCollegue(collegue);
   }
   jedeteste(collegue: Collegue) {
     // événement clic sur le bouton "Je déteste"
     // => le score du collègue est diminué de 5
-    this._cs.detesterUnCollegue(collegue);
+    this.cs.detesterUnCollegue(collegue);
 
   }
 }

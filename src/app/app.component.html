@@ -24,9 +24,5 @@
     <a class="btn btn-primary mr-4" routerLink="/tableau" routerLinkActive="active-link" role="button">Tableau</a>
     <a class="btn btn-primary mr-4" routerLink="/caroussel" routerLinkActive="active-link" role="button">Caroussel</a>
   </div>
-<div class="row">
-    <div class="card-deck" *ngFor="let obj of this.collegues">
-      <app-un-collegue [collegue]="obj"></app-un-collegue>
-      
-    </div>
-</div>
+
+    <router-outlet></router-outlet>

@@ -1,3 +1,15 @@
-<p>
-  caroussel works!
-</p>
+<ngb-carousel class="mb-5">
+  <ng-template ngbSlide *ngFor="let obj of this.collegues">
+    <img src={{obj.urlImage}} alt={{obj.pseudo}} style="width: 90rem; height: 30rem;">
+    <div class="carousel-caption">
+      <h3>{{obj.pseudo}} <br /> {{obj.score}}</h3>
+      <p>
+        <small class="text-muted">
+          <button (click)="jaime(obj)" type="button" class="btn btn-outline-success mr-4">J'aime</button>
+          <button (click)="jedeteste(obj)" type="button" class="btn btn-outline-danger">Je deteste</button>
+        </small>
+      </p>
+    </div>
+  </ng-template>
+
+</ngb-carousel>

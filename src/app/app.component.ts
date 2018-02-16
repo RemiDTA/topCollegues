@@ -9,26 +9,10 @@ import { CollegueService } from './shared/service/collegue.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  public collegues: Collegue[];
 
   constructor(public cs: CollegueService) {
   }
   ngOnInit() {
-    this.cs.listerCollegues().then(
-      resultat => this.collegues = resultat,
-      erreur => console.log(erreur));
-
   }
-  add(pseudo: HTMLInputElement, imageUrl: HTMLInputElement, e) {
-    e.preventDefault();
-    let newcollegue = new Collegue(pseudo.value, imageUrl.value);
-    this.cs.sauvegarder(newcollegue).then(
-      resultat => this.ngOnInit(),
-      reject => console.log(reject));
 
-    // vider les champs de saisie
-    pseudo.value = '';
-    imageUrl.value = '';
-    return false; // pour éviter le rechargement de la page
-  }
 }

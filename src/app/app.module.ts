@@ -12,8 +12,8 @@ import { CarousselComponent } from './caroussel/caroussel.component';
 
 const appRoutes: Routes = [
   { path: 'classique', component: ClassiqueComponent }, // /classique affiche le composant A
-  { path: 'classique', component: TableauComponent },
-  { path: 'classique', component: CarousselComponent },
+  { path: 'tableau', component: TableauComponent },
+  { path: 'caroussel', component: CarousselComponent },
   { path: '**', redirectTo: 'classique'} // redirige vers la route classique par défaut
   ];
 
