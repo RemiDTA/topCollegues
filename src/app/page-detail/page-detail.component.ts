@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CollegueService } from '../shared/service/collegue.service';
-import { reject } from 'q';
 import { Collegue } from '../shared/domain/Collegue';
 
 
@@ -12,19 +11,15 @@ import { Collegue } from '../shared/domain/Collegue';
 })
 export class PageDetailComponent implements OnInit {
   public nom: string;
+  public collegue: Collegue = new Collegue("","")
   constructor(private route: ActivatedRoute, public cs: CollegueService) {
-    // récupération du paramètre pseudo
-    route.params.subscribe(params => { this.nom = params['nom']; });
   }
 
   ngOnInit() {
+     // récupération du paramètre pseudo
+    this.route.params.subscribe(params => { this.nom = params['nom']; });
+    this.cs.trouverUnCollegue(this.nom).then(col =>   this.collegue = col)
   }
-  chercherCollegue(nom: string) {
-    let collegue = this.cs.listerCollegues().
-      then(
-        listcol => listcol.filter(ele => ele.pseudo == nom),
-        erreur => console.log(erreur))
-        return collegue
-  }
+
 }
 

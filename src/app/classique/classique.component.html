@@ -1,18 +1,29 @@
 <form>
-    <div class="form-row align-items-center mb-3">
-      
-      <div class="col-6">
-        <div class="input-group mb-2">
-          <div class="input-group-prepend">
-            <div class="input-group-text">Limite</div>
-          </div>
-          <input type="number" class="form-control" id="limite" (input)="limiter(lim)" #lim min="0" value="0">
+  <div class="form-row align-items-center mb-3">
+
+    <div class="col-6">
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text">Limite</div>
         </div>
+        <input type="number" class="form-control" id="limite" (input)="limiter(lim)" #lim min="0" value="0">
       </div>
     </div>
-  </form>
+  </div>
+  <div class="form-row align-items-center mb-3">
+
+    <div class="col-6">
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text">Filtrer par pseudo</div>
+        </div>
+        <input type="texte" class="form-control" id="limite" (input)="filtrerPseudo(filtre)" #filtre >
+      </div>
+    </div>
+  </div>
+</form>
 <div class="row">
-  <div class="card-deck" *ngFor="let obj of collegues | slice:0:limite">
+  <div class="card-deck" *ngFor="let obj of collegues | triPseudo:filtre.value | slice:0:limite">
     <app-un-collegue [collegue]="obj"></app-un-collegue>
   </div>
 </div>

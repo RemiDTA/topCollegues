@@ -14,6 +14,15 @@ export class CollegueService {
 
   }
 
+  trouverUnCollegue(nom:string): Promise<Collegue> {
+    return this.listerCollegues()
+    .then(resultat => resultat.filter(ele => ele.pseudo == nom)[0])
+    .catch(erreur => {
+      console.log(erreur)
+      return new Collegue("","")
+    });
+  } 
+
 
   sauvegarder(newCollegue: Collegue): Promise<Collegue> {
 
