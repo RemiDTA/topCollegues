@@ -3,10 +3,12 @@ import { Collegue } from '../shared/domain/Collegue';
 import { AppComponent } from '../app.component';
 import { CollegueService } from '../shared/service/collegue.service';
 
+
 @Component({
   selector: 'app-un-collegue',
   templateUrl: './un-collegue.component.html',
-  styleUrls: ['./un-collegue.component.css']
+  styleUrls: ['./un-collegue.component.css'],
+  
 })
 
 export class UnCollegueComponent implements OnInit {

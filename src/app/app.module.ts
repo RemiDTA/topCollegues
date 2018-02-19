@@ -10,6 +10,7 @@ import { TableauComponent } from './tableau/tableau.component';
 import { ClassiqueComponent } from './classique/classique.component';
 import { CarousselComponent } from './caroussel/caroussel.component';
 import { PageDetailComponent } from './page-detail/page-detail.component';
+import { ScorePipe } from './shared/pipe/score.pipe';
 
 const appRoutes: Routes = [
   { path: 'classique', component: ClassiqueComponent }, // /classique affiche le composant A
@@ -27,7 +28,8 @@ const appRoutes: Routes = [
     TableauComponent,
     ClassiqueComponent,
     CarousselComponent,
-    PageDetailComponent
+    PageDetailComponent,
+    ScorePipe
   ],
   imports: [
     BrowserModule,
