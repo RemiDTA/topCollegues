@@ -13,7 +13,7 @@
         <a routerLink="/detail/{{obj.pseudo}}"><img src={{obj.urlImage}} alt={{obj.pseudo}} style="width: 6rem; height: 6rem;"></a>
       </td>
       <td>{{obj.pseudo | uppercase}}</td>
-      <td>{{obj.score}}</td>
+      <td [innerHTML]="obj.score | score"></td>
       <td>
         <small class="text-muted">
           <button (click)="jaime(obj)" type="button" class="btn btn-outline-success mr-4">J'aime</button>

@@ -2,7 +2,7 @@
   <ng-template ngbSlide *ngFor="let obj of this.collegues">
     <a routerLink="/detail/{{obj.pseudo}}"><img src={{obj.urlImage}} alt={{obj.pseudo}} style="width: 90rem; height: 30rem;"></a>
     <div class="carousel-caption">
-      <h3>{{obj.pseudo | uppercase}} <br /> {{obj.score}}</h3>
+      <h3>{{obj.pseudo | uppercase}} </h3> <h3 [innerHTML]="obj.score | score"></h3>
       <p>
         <small class="text-muted">
           <button (click)="jaime(obj)" type="button" class="btn btn-outline-success mr-4">J'aime</button>
