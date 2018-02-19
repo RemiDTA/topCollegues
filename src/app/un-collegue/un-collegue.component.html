@@ -1,7 +1,7 @@
 <div class="card" style="width: 18rem;">
   <a routerLink="/detail/{{collegue.pseudo}}"><img class="card-img-top" src={{collegue.urlImage}} alt={{collegue.pseudo}} style="width: 18rem; height: 18rem;"></a>
     <div class="card-body">
-      <h5 class="card-title">{{collegue.pseudo}}</h5>
+      <h5 class="card-title">{{collegue.pseudo | uppercase}}</h5>
       <p class="card-text">{{collegue.score}}</p>
       <p class="card-text">
         <small class="text-muted">

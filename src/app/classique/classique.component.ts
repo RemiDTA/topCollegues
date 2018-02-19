@@ -10,6 +10,7 @@ import { CollegueService } from '../shared/service/collegue.service';
 })
 export class ClassiqueComponent implements OnInit {
   public collegues: Collegue[];
+  public limite: number;
 
   constructor(public cs: CollegueService) {
   }
@@ -19,16 +20,9 @@ export class ClassiqueComponent implements OnInit {
       erreur => console.log(erreur));
 
   }
-  add(pseudo: HTMLInputElement, imageUrl: HTMLInputElement, e) {
-    e.preventDefault();
-    let newCollegue = new Collegue(pseudo.value, imageUrl.value);
-    this.cs.sauvegarder(newCollegue).then(
-      resultat => this.ngOnInit(),
-      reject => console.log(reject));
-
-    // vider les champs de saisie
-    pseudo.value = '';
-    imageUrl.value = '';
+  limiter(nombre: HTMLInputElement) {
+    this.limite = +nombre.value;
     return false; // pour éviter le rechargement de la page
   }
+
 }

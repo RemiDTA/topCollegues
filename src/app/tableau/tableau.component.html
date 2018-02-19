@@ -12,7 +12,7 @@
       <td>
         <a routerLink="/detail/{{obj.pseudo}}"><img src={{obj.urlImage}} alt={{obj.pseudo}} style="width: 6rem; height: 6rem;"></a>
       </td>
-      <td>{{obj.pseudo}}</td>
+      <td>{{obj.pseudo | uppercase}}</td>
       <td>{{obj.score}}</td>
       <td>
         <small class="text-muted">

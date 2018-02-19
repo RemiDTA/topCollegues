@@ -9,10 +9,23 @@ import { CollegueService } from './shared/service/collegue.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
+  public insertion=false;
+  public nouveau: string;
   constructor(public cs: CollegueService) {
   }
   ngOnInit() {
+  }
+  add(pseudo: HTMLInputElement, imageUrl: HTMLInputElement, e) {
+    e.preventDefault();
+    let newCollegue = new Collegue(pseudo.value, imageUrl.value);
+    this.cs.sauvegarder(newCollegue);
+
+    // vider les champs de saisie
+    this.insertion=true;
+    this.nouveau=pseudo.value;
+    pseudo.value = '';
+    imageUrl.value = '';
+    return false; // pour éviter le rechargement de la page
   }
 
 }
