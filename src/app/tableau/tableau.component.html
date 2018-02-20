@@ -16,8 +16,8 @@
       <td [innerHTML]="obj.score | score"></td>
       <td>
         <small class="text-muted">
-          <button (click)="jaime(obj)" type="button" class="btn btn-outline-success mr-4">J'aime</button>
-          <button (click)="jedeteste(obj)" type="button" class="btn btn-outline-danger">Je deteste</button>
+          <button (click)="jaime(obj)" type="button" class="btn btn-outline-success mr-4" [disabled]="!co">J'aime</button>
+          <button (click)="jedeteste(obj)" type="button" class="btn btn-outline-danger" [disabled]="!co">Je deteste</button>
         </small>
       </td>
     </tr>

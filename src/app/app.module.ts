@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { UnCollegueComponent } from './un-collegue/un-collegue.component';
@@ -12,10 +12,11 @@ import { CarousselComponent } from './caroussel/caroussel.component';
 import { PageDetailComponent } from './page-detail/page-detail.component';
 import { ScorePipe } from './shared/pipe/score.pipe';
 import { TriPseudoPipe } from './shared/pipe/tri-pseudo.pipe';
+import { VotreDernierAvisComponent } from './votre-dernier-avis/votre-dernier-avis.component';
 
 
 const appRoutes: Routes = [
-  { path: 'classique', component: ClassiqueComponent }, // /classique affiche le composant A
+  { path: 'classique', component: ClassiqueComponent }, 
   { path: 'tableau', component: TableauComponent },
   { path: 'caroussel', component: CarousselComponent },
   { path: 'detail/:nom', component: PageDetailComponent },
@@ -32,7 +33,8 @@ const appRoutes: Routes = [
     CarousselComponent,
     PageDetailComponent,
     ScorePipe,
-    TriPseudoPipe
+    TriPseudoPipe,
+    VotreDernierAvisComponent
   ],
   imports: [
     BrowserModule,

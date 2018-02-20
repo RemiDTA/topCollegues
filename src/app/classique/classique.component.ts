@@ -12,6 +12,7 @@ export class ClassiqueComponent implements OnInit {
   public collegues: Collegue[];
   public limite: number;
   public tri: string;
+  public co : boolean;
 
   constructor(public cs: CollegueService) {
   }
@@ -24,6 +25,8 @@ export class ClassiqueComponent implements OnInit {
         this.collegues.push(col),
     erreur=> console.log(erreur))
 
+    //this.testerCo();
+
   }
   limiter(nombre: HTMLInputElement) {
     this.limite = +nombre.value;
@@ -33,5 +36,9 @@ export class ClassiqueComponent implements OnInit {
     this.tri= pseudo.value;
     return false; // pour éviter le rechargement de la page
   }
-
+  testerCo() {
+    this.cs.testConnexion().subscribe(result => this.co = result);
+    setTimeout(() => this.ngOnInit(), 5000);
+    this.testerCo();
+  }
 }

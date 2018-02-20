@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Collegue } from './shared/domain/Collegue';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { CollegueService } from './shared/service/collegue.service';
+import { VotreDernierAvisComponent } from './votre-dernier-avis/votre-dernier-avis.component';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +12,13 @@ import { CollegueService } from './shared/service/collegue.service';
 export class AppComponent implements OnInit {
   public insertion = false;
   public nouveau: string;
+  public co: boolean;
+
   constructor(public cs: CollegueService) {
   }
   ngOnInit() {
+    this.cs.testConnexion().subscribe(result=>{this.co=result; console.log(this.co)});
+    setTimeout(()=> this.ngOnInit(), 5000)
   }
   add(pseudo: HTMLInputElement, imageUrl: HTMLInputElement, e) {
     e.preventDefault();

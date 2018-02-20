@@ -10,6 +10,7 @@ import { CollegueService } from '../shared/service/collegue.service';
 })
 export class CarousselComponent implements OnInit {
   public collegues: Collegue[];
+  public co: boolean;
 
   constructor(public cs: CollegueService) {
   }
@@ -22,6 +23,8 @@ export class CarousselComponent implements OnInit {
     this.cs.collegueSaveObs.subscribe(col =>
       this.collegues.push(col),
       erreur => console.log(erreur))
+
+    //this.testerCo();
 
   }
 
@@ -36,5 +39,9 @@ export class CarousselComponent implements OnInit {
     this.cs.detesterUnCollegue(collegue);
 
   }
-
+  testerCo() {
+    this.cs.testConnexion().subscribe(result => this.co = result);
+    setTimeout(() => this.ngOnInit(), 5000);
+    this.testerCo();
+  }
 }

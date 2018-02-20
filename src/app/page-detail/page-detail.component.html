@@ -5,8 +5,8 @@
       <p class="card-text">{{collegue.score}}</p>
       <p class="card-text">
         <small class="text-muted">
-          <button (click)="jaime(collegue)" type="button" class="btn btn-outline-success mr-4">J'aime</button>
-          <button (click)="jedeteste(collegue)" type="button" class="btn btn-outline-danger" (majScore)="maj(collegue)">Je deteste</button>
+          <button (click)="jaime(collegue)" type="button" class="btn btn-outline-success mr-4" [disabled]="!co">J'aime</button>
+          <button (click)="jedeteste(collegue)" type="button" class="btn btn-outline-danger" (majScore)="maj(collegue)" [disabled]="!co">Je deteste</button>
         </small>
       </p>
     </div>
