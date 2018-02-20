@@ -1,46 +1,52 @@
 import { Injectable } from '@angular/core';
 import { Collegue } from '../domain/Collegue';
 import { HttpClient } from '@angular/common/http';
-
+import { Observable } from 'rxjs/Observable';
+import { Subject } from "rxjs/Subject";
 
 
 @Injectable()
 export class CollegueService {
 
-  constructor(private _http: HttpClient) { }
-  listerCollegues(): Promise<Collegue[]> {
-    let req = this._http.get<Collegue[]>('http://localhost:8080/collegues');
-    return req.toPromise();
+  private subjectSauvegarde: Subject<Collegue> = new Subject();
 
+  get collegueSaveObs(): Observable<Collegue> {
+    return this.subjectSauvegarde.asObservable();
   }
 
-  trouverUnCollegue(nom:string): Promise<Collegue> {
-    return this.listerCollegues()
-    .then(resultat => resultat.filter(ele => ele.pseudo == nom)[0])
-    .catch(erreur => {
-      console.log(erreur)
-      return new Collegue("","")
-    });
-  } 
+  constructor(private _http: HttpClient) { }
 
+  listerCollegues(): Observable<Collegue[]> {
+    let req = this._http.get<Collegue[]>('http://localhost:8080/collegues');
 
-  sauvegarder(newCollegue: Collegue): Promise<Collegue> {
+    return req;
+
+  }
+  /*
+    trouverUnCollegue(nom:string): Collegue {
+      return this.listerCollegues().subscribe(resultat => resultat.filter(ele => ele.pseudo == nom)[0]));
+    } 
+  */
+
+  sauvegarder(newCollegue: Collegue): Observable<Collegue> {
 
     // sauvegarder le nouveau collègue côté serveur
     let req = this._http.post<Collegue>('http://localhost:8080/collegues', newCollegue);
-    return req.toPromise();
+    req.subscribe(resultat => this.subjectSauvegarde.next(newCollegue),
+      erreur => console.log(erreur));
+    return this.subjectSauvegarde;
 
   }
-  
-aimerUnCollegue(unCollegue: Collegue): Promise < Collegue > {
+
+  aimerUnCollegue(unCollegue: Collegue): Observable<Collegue> {
     // TODO Aimer un collègue côté serveur
-    let req = this._http.patch<Collegue>('http://localhost:8080/collegues/' +unCollegue.pseudo, { "action" : "aimer" });
-    return req.toPromise();
-}
-detesterUnCollegue(unCollegue: Collegue): Promise < Collegue > {
+    let req = this._http.patch<Collegue>('http://localhost:8080/collegues/' + unCollegue.pseudo, { "action": "aimer" });
+    return req;
+  }
+  detesterUnCollegue(unCollegue: Collegue): Observable<Collegue> {
     // TODO Détester un collègue côté serveur
-     let req = this._http.patch<Collegue>('http://localhost:8080/collegues/' +unCollegue.pseudo, { "action" : "detester" });
-    return req.toPromise();
+    let req = this._http.patch<Collegue>('http://localhost:8080/collegues/' + unCollegue.pseudo, { "action": "detester" });
+    return req;
   }
 
 }

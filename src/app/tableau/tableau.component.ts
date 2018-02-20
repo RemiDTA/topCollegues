@@ -14,9 +14,13 @@ export class TableauComponent implements OnInit {
   constructor(public cs: CollegueService) {
   }
   ngOnInit() {
-    this.cs.listerCollegues().then(
+    this.cs.listerCollegues().subscribe(
       resultat => this.collegues = resultat,
       erreur => console.log(erreur));
+
+    this.cs.collegueSaveObs.subscribe(col =>
+      this.collegues.push(col),
+      erreur => console.log(erreur))
 
   }
   jaime(collegue: Collegue) {

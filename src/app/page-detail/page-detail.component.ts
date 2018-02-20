@@ -18,7 +18,7 @@ export class PageDetailComponent implements OnInit {
   ngOnInit() {
      // récupération du paramètre pseudo
     this.route.params.subscribe(params => { this.nom = params['nom']; });
-    this.cs.trouverUnCollegue(this.nom).then(col =>   this.collegue = col)
+    //this.cs.trouverUnCollegue(this.nom).then(col =>   this.collegue = col)
   }
 
 }
