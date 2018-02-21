@@ -69,6 +69,11 @@ export class CollegueService {
     return req;
   }
 
+  listerCommentaires(col: Collegue): Observable<Commentaire[]> {
+    let req = this._http.get<Commentaire[]>('http://localhost:8080/collegues/'+col.pseudo+'/commentaires');
+    return req;
+  }
+
   aimerUnCollegue(unCollegue: Collegue): Observable<Map<string, Collegue>> {
     // Aimer un collègue côté serveur
     let avis = new Map();
