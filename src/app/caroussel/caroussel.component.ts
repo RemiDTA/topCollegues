@@ -26,7 +26,8 @@ export class CarousselComponent implements OnInit {
   public collegues: Collegue[];
   public co: boolean;
   public closeResult: string;
-  public commentaire: string = "Postez ici votre commentaire";
+  public commentaire: string;
+  public activBtn: boolean;
 
   constructor(public cs: CollegueService, private modalService: NgbModal) {
   }
@@ -59,8 +60,19 @@ export class CarousselComponent implements OnInit {
     this.cs.detesterUnCollegue(collegue);
 
   }
+  filtrerCom(){
+    
+    if (this.commentaire.length>10)
+    {
+      this.activBtn=true;
+    }
+    else
+    {
+      this.activBtn=false;
+    }
+  }
   submit(col : Collegue) {
       let com : Commentaire = new Commentaire(col, this.commentaire);
-      this.cs.sauvegarderCom(com).subscribe();
+      this.cs.sauvegarderCom(com).subscribe(result =>result,erreur =>alert("Ceci est une erreur tres explicite : regarde en haut a droite mon coco"));
     }
 }

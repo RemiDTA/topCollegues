@@ -7,7 +7,32 @@
         <small class="text-muted">
           <button (click)="jaime(collegue)" type="button" class="btn btn-outline-success mr-4" [disabled]="!co">J'aime</button>
           <button (click)="jedeteste(collegue)" type="button" class="btn btn-outline-danger" (majScore)="maj(collegue)" [disabled]="!co">Je deteste</button>
-          <button (click)="commenter(collegue)" type="button" class="btn btn-outline-secondary mr-4" [disabled]="!co">Rédiger un commentaire</button>
+          <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title">Votre avis :</h4>
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <form (ngSubmit)="submit(collegue)" novalidate (submit)="c('Close click')" #formulaire>
+                <label>Que pensez vous de {{collegue.pseudo}} ?
+                </label>
+                <textarea rows="10" cols="50" name="com" [(ngModel)]="commentaire" required minlength="10" maxlength="255" placeholder="Postez ici votre commentaire"
+                  (input)="filtrerCom()"></textarea>
+                <button type="submit" class="btn btn-outline-light" [disabled]="!activBtn">Enregistrer</button>
+                
+              </form>
+
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-light" (click)="c('Close click') ">Close</button>
+            </div>
+          </ng-template>
+
+          <button class="btn btn btn-outline-primary ml-4" (click)="open(content)">Rédiger un avis</button>
         </small>
       </p>
     </div>
