@@ -16,8 +16,10 @@ export class UnCollegueComponent implements OnInit {
   @Output() majScore: EventEmitter<void> = new EventEmitter<void>()
   // paramètre d'entrée "collegue"
   @Input() collegue: Collegue;
+  public co: boolean;
   constructor(public cs: CollegueService) { }
   ngOnInit() {
+    this.cs.testConnexion().subscribe(result=>this.co=result);
   }
   jaime(collegue: Collegue) {
     // événement clic sur le bouton "J'aime"

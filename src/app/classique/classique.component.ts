@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Collegue } from '../shared/domain/Collegue';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { CollegueService } from '../shared/service/collegue.service';
@@ -12,7 +12,7 @@ export class ClassiqueComponent implements OnInit {
   public collegues: Collegue[];
   public limite: number;
   public tri: string;
-  public co : boolean;
+  public co: boolean;
 
   constructor(public cs: CollegueService) {
   }
@@ -25,7 +25,7 @@ export class ClassiqueComponent implements OnInit {
         this.collegues.push(col),
     erreur=> console.log(erreur))
 
-    //this.testerCo();
+    this.cs.testConnexion().subscribe(result=>this.co=result);
 
   }
   limiter(nombre: HTMLInputElement) {
@@ -35,10 +35,5 @@ export class ClassiqueComponent implements OnInit {
   filtrerPseudo(pseudo: HTMLInputElement) {
     this.tri= pseudo.value;
     return false; // pour éviter le rechargement de la page
-  }
-  testerCo() {
-    this.cs.testConnexion().subscribe(result => this.co = result);
-    setTimeout(() => this.ngOnInit(), 5000);
-    this.testerCo();
   }
 }

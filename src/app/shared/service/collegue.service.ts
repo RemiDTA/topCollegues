@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from "rxjs/Subject";
 import 'rxjs/add/operator/map';
+import { Commentaire } from '../domain/Commentaire';
 
 
 @Injectable()
@@ -35,10 +36,15 @@ export class CollegueService {
 
   //Pour tester la co on envoi une requête si c good on est en ligne sinan hors ligne
   testConnexion(): Observable<boolean> {
-    let req = this._http.get<Collegue[]>('http://localhost:8080/collegues').subscribe(
-      resultat => this.subjectConnexion.next(true), 
-      erreur => this.subjectConnexion.next(false))
-    return this.subjectConnexion;
+    this._http.get<Collegue[]>('http://localhost:8080/collegues').subscribe(
+        resultat => this.subjectConnexion.next(true),
+        erreur => this.subjectConnexion.next(false))
+    setInterval(() => {
+      this._http.get<Collegue[]>('http://localhost:8080/collegues').subscribe(
+        resultat => this.subjectConnexion.next(true),
+        erreur => this.subjectConnexion.next(false))
+    }, 5000);
+    return this.subjectConnexion
   }
 
 
@@ -56,6 +62,11 @@ export class CollegueService {
       erreur => console.log(erreur));
     return this.subjectSauvegarde;
 
+  }
+  sauvegarderCom(com: Commentaire): Observable<Commentaire> {
+    // sauvegarder le nouveau collègue côté serveur
+    let req = this._http.post<Commentaire>('http://localhost:8080/collegues/commentaires', com);
+    return req;
   }
 
   aimerUnCollegue(unCollegue: Collegue): Observable<Map<string, Collegue>> {

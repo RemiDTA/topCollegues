@@ -1,12 +1,13 @@
 <div class="card" style="width: 18rem;">
   <a routerLink="/detail/{{collegue.pseudo}}"><img class="card-img-top" src={{collegue.urlImage}} alt={{collegue.pseudo}} style="width: 18rem; height: 18rem;"></a>
     <div class="card-body">
-      <h5 class="card-title">{{collegue.pseudo}}</h5>
-      <p class="card-text">{{collegue.score}}</p>
+      <h5 class="card-title">{{collegue.pseudo | uppercase}}</h5>
+      <p class="card-text" [innerHTML]="collegue.score | score"></p>
       <p class="card-text">
         <small class="text-muted">
           <button (click)="jaime(collegue)" type="button" class="btn btn-outline-success mr-4" [disabled]="!co">J'aime</button>
           <button (click)="jedeteste(collegue)" type="button" class="btn btn-outline-danger" (majScore)="maj(collegue)" [disabled]="!co">Je deteste</button>
+          <button (click)="commenter(collegue)" type="button" class="btn btn-outline-secondary mr-4" [disabled]="!co">Rédiger un commentaire</button>
         </small>
       </p>
     </div>

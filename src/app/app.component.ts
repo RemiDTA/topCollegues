@@ -17,8 +17,7 @@ export class AppComponent implements OnInit {
   constructor(public cs: CollegueService) {
   }
   ngOnInit() {
-    this.cs.testConnexion().subscribe(result=>{this.co=result; console.log(this.co)});
-    setTimeout(()=> this.ngOnInit(), 5000)
+    this.cs.testConnexion().subscribe(result=>this.co=result);
   }
   add(pseudo: HTMLInputElement, imageUrl: HTMLInputElement, e) {
     e.preventDefault();

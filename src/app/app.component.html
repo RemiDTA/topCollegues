@@ -2,7 +2,7 @@
   <h1> Top Collègues </h1>
 
   <span class="badge badge-pill badge-primary float-right" *ngIf="co">online</span>
-  <span class="badge badge-pill badge-danger float-right" *ngIf="co==false">offline</span>
+  <span class="badge badge-pill badge-danger float-right" *ngIf="!co">offline</span>
   <h2>Les meilleurs collègues du moment !</h2>
   <div class="bg-light pt-5 pl-5 pb-5 pr-5 mb-5">
     <form id="formulaire">

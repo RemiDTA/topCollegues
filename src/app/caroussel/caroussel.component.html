@@ -1,12 +1,40 @@
 <ngb-carousel class="mb-5">
   <ng-template ngbSlide *ngFor="let obj of this.collegues">
-    <a routerLink="/detail/{{obj.pseudo}}"><img src={{obj.urlImage}} alt={{obj.pseudo}} style="width: 90rem; height: 30rem;"></a>
+    <a routerLink="/detail/{{obj.pseudo}}">
+      <img src={{obj.urlImage}} alt={{obj.pseudo}} style="width: 90rem; height: 30rem;">
+    </a>
     <div class="carousel-caption">
-      <h3>{{obj.pseudo | uppercase}} </h3> <h3 [innerHTML]="obj.score | score"></h3>
+      <h3>{{obj.pseudo | uppercase}} </h3>
+      <h3 [innerHTML]="obj.score | score"></h3>
       <p>
         <small class="text-muted">
-          <button (click)="jaime(obj)" type="button" class="btn btn-outline-success mr-4">J'aime</button>
-          <button (click)="jedeteste(obj)" type="button" class="btn btn-outline-danger">Je deteste</button>
+          <button (click)="jaime(obj)" type="button" class="btn btn-outline-success mr-4" [disabled]="!co">J'aime</button>
+          <button (click)="jedeteste(obj)" type="button" class="btn btn-outline-danger" [disabled]="!co">Je deteste</button>
+          <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title">Votre avis :</h4>
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <form (ngSubmit)="submit(obj)" novalidate (submit)="c('Close click')">
+                <label>Que pensez vous de {{obj.pseudo}} ?
+                </label>
+                <textarea rows="10" cols="50" name="com" [(ngModel)]="commentaire" required maxlength="255"></textarea>
+                <button type="submit">Submit</button>
+              </form>
+
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-light" (click)="c('Close click') " >Close</button>
+            </div>
+          </ng-template>
+
+          <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Rédiger un avis</button>
+
         </small>
       </p>
     </div>

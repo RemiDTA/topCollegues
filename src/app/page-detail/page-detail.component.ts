@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CollegueService } from '../shared/service/collegue.service';
 import { Collegue } from '../shared/domain/Collegue';
@@ -20,17 +20,21 @@ export class PageDetailComponent implements OnInit {
 
   ngOnInit() {
     // récupération du paramètre pseudo
-    this.route.params.subscribe(params => { this.nom = params['nom']; });
+    this.route.params.subscribe(params => this.nom = params['nom']);
     this.cs.trouverUnCollegue(this.nom).subscribe(resultat=>this.collegue=resultat,
     erreur=> console.log(erreur));
-
-    //this.testerCo();
-
+    this.cs.testConnexion().subscribe(result=>this.co=result);
   }
-  testerCo() {
-    this.cs.testConnexion().subscribe(result => this.co = result);
-    setTimeout(() => this.ngOnInit(), 5000);
-    this.testerCo();
+  jaime(collegue: Collegue) {
+    // événement clic sur le bouton "J'aime"
+    // => le score du collègue est augmenté de 10
+    this.cs.aimerUnCollegue(collegue);
+  }
+  jedeteste(collegue: Collegue) {
+    // événement clic sur le bouton "Je déteste"
+    // => le score du collègue est diminué de 5
+    this.cs.detesterUnCollegue(collegue);
+
   }
 }
 

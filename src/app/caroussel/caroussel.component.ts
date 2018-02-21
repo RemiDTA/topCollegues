@@ -1,18 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Collegue } from '../shared/domain/Collegue';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { CollegueService } from '../shared/service/collegue.service';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { Commentaire } from '../shared/domain/Commentaire';
+
+
 
 @Component({
   selector: 'app-caroussel',
   templateUrl: './caroussel.component.html',
-  styleUrls: ['./caroussel.component.css']
+  styleUrls: ['./caroussel.component.css'],
+  encapsulation: ViewEncapsulation.None,
+  styles: [`
+    .dark-modal .modal-content {
+      background-color: #292b2c;
+      color: white;
+    }
+    .dark-modal .close {
+      color: white;   
+    }
+  `]
 })
 export class CarousselComponent implements OnInit {
   public collegues: Collegue[];
   public co: boolean;
+  public closeResult: string;
+  public commentaire: string = "Postez ici votre commentaire";
 
-  constructor(public cs: CollegueService) {
+  constructor(public cs: CollegueService, private modalService: NgbModal) {
   }
 
   ngOnInit() {
@@ -24,8 +40,12 @@ export class CarousselComponent implements OnInit {
       this.collegues.push(col),
       erreur => console.log(erreur))
 
-    //this.testerCo();
+      this.cs.testConnexion().subscribe(result=>this.co=result);
 
+  }
+
+  open(content) {
+    this.modalService.open(content, { windowClass: 'dark-modal' });
   }
 
   jaime(collegue: Collegue) {
@@ -39,9 +59,8 @@ export class CarousselComponent implements OnInit {
     this.cs.detesterUnCollegue(collegue);
 
   }
-  testerCo() {
-    this.cs.testConnexion().subscribe(result => this.co = result);
-    setTimeout(() => this.ngOnInit(), 5000);
-    this.testerCo();
-  }
+  submit(col : Collegue) {
+      let com : Commentaire = new Commentaire(col, this.commentaire);
+      this.cs.sauvegarderCom(com).subscribe();
+    }
 }

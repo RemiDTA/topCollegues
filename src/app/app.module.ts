@@ -13,7 +13,7 @@ import { PageDetailComponent } from './page-detail/page-detail.component';
 import { ScorePipe } from './shared/pipe/score.pipe';
 import { TriPseudoPipe } from './shared/pipe/tri-pseudo.pipe';
 import { VotreDernierAvisComponent } from './votre-dernier-avis/votre-dernier-avis.component';
-
+import { FormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   { path: 'classique', component: ClassiqueComponent }, 
@@ -40,7 +40,8 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     NgbModule.forRoot(),
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    FormsModule
   ],
   providers: [CollegueService],
   bootstrap: [AppComponent]
