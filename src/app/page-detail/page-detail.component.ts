@@ -40,11 +40,12 @@ export class PageDetailComponent implements OnInit {
     this.route.params.subscribe(params => this.nom = params['nom']);
 
     //Initialisation des différents champs
-    this.cs.trouverUnCollegue(this.nom).subscribe(resultat=>this.collegue=resultat,
+    this.cs.trouverUnCollegue(this.nom).subscribe(resultat=>{this.collegue=resultat;
+      this.cs.listerCommentaires(this.collegue).subscribe(resultat=>this.coms=resultat,erreur=>console.log(erreur))},
     erreur=> console.log(erreur));
 
     this.cs.testConnexion().subscribe(result=>this.co=result);
-    this.cs.listerCommentaires(this.collegue).subscribe(resultat=>this.coms=resultat,erreur=>console.log(erreur))
+    
   }
   jaime(collegue: Collegue) {
     // événement clic sur le bouton "J'aime"
